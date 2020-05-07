@@ -49,12 +49,12 @@ class UserController extends Controller
         $data['password'] = \Hash::make($data['password']);
 
         // writing to database || insert into users ...
-        $user = User::create($data);
-        return redirect("/users");
+         $user = User::create($data);
+        return redirect("/users/".$user->id);
     }
 
     /**
-     * Display the specified resource.
+     * Display the sp$user = ecified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,7 @@ Route::get('/users/{user_id}','UserController@show');
 Route::get('users/{user_id}/edit','UserController@edit');
 Route::put('users/{user_id}','UserController@update');
 Route::delete('users/{user_id}','UserController@destroy');
+
+Route::get('/posts/new', 'PostController@create');
+Route::post('/posts', 'PostController@store');
+Route::get('/posts', 'PostController@index');
