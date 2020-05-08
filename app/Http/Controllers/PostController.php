@@ -51,9 +51,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($post_id)
     {
-        //
+        $post = Post::find($post_id);
+        if ($post == null) {
+            return "404 user not found";
+        
+        }
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -62,9 +67,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($post_id)
     {
-        //
+        $post = Post::find($post_id);
+        if ($post == null) {
+            return "404 user not found";
+        }
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -74,9 +83,20 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $post_id)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required'
+        ]);
+
+        $post = Post::find($post_id);
+        if ($post == null) {
+            return "404";
+        }
+
+        $post->update($data);
+        return redirect('/posts/'.$post->id);
     }
 
     /**
@@ -85,8 +105,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($post_id)
     {
-        //
+        $post = Post::find($post_id);
+        if ($post == null) {
+            return "404 not found";
+        }
+        $post->delete();
+        return redirect('/posts');
     }
 }

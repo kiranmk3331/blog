@@ -27,3 +27,7 @@ Route::delete('users/{user_id}','UserController@destroy');
 Route::get('/posts/new', 'PostController@create');
 Route::post('/posts', 'PostController@store');
 Route::get('/posts', 'PostController@index');
+Route::get('posts/{post_id}','PostController@show');
+Route::get('posts/{post_id}/edit','PostController@edit');
+Route::put('posts/{post_id}','PostController@update');
+Route::delete('posts/{post_id}','PostController@destroy');
